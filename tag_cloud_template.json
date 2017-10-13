@@ -1,0 +1,72 @@
+{
+
+  "template": "tag_cloud",
+  "settings": {
+     "index.refresh_interval": "5s",
+     "index": {
+      "analysis": {
+        "analyzer": {
+          "default": {
+            "type": "smartcn"
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+     "_default_": {
+        "dynamic_templates": [
+           {
+              "message_field": {
+                 "mapping": {
+                    "norms": false,
+                    "type": "text"
+                 },
+                 "match_mapping_type": "string",
+                 "match": "message"
+              }
+           },
+           {
+              "string_fields": {
+                 "mapping": {
+                    "norms": false,
+                    "index": true,
+                    "type": "text",
+                    "fields": {
+                       "keyword": {
+                          "ignore_above": 256,
+                          "type": "text"
+                       }
+                    }
+                 },
+                 "match_mapping_type": "string",
+                 "match": "*"
+              }
+           }
+        ],
+        "properties": {
+           "@version": {
+              "type": "text"
+           }
+        },
+        "message": {
+          "type": "string",
+          "index": true,
+          "analyzer": "smartcn",
+          "fields": {
+            "raw": {
+              "type": "text",
+              "ignore_above": 256
+            },
+            "keyword": {
+              "ignore_above": 256,
+              "type": "text"
+           }
+          }
+        },
+        "_all": {
+           "enabled": true
+        }
+     }
+  }
+}
