@@ -55,12 +55,11 @@
           "analyzer": "smartcn",
           "fields": {
             "raw": {
-              "type": "text",
-              "ignore_above": 256
+              "type": "text"
             },
             "keyword": {
               "ignore_above": 256,
-              "type": "text"
+              "type": "keyword"
            }
           }
         },
